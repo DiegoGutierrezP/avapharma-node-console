@@ -1,0 +1,5 @@
+export * from './cliente.data.js'
+export * from './inventario.data.js'
+export * from './producto.data.js'
+export * from './sucursal.data.js'
+export * from './basket.data.js'

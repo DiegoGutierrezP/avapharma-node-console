@@ -36,7 +36,7 @@ export const addProductCarrito = (idProduct,dni,idSucur) => {
 }
 
 export const listCarrito = (dni) => {
-    let listado = '';
+    /* let listado = '';
     console.log('\n');
     let totalCarrito = 0;
     basketData.filter(b => b.dni === dni).forEach((b,i) => {
@@ -46,10 +46,29 @@ export const listCarrito = (dni) => {
 
         const idx = `${i + 1}.`.red;
         const precioColor = `S/ ${precioItem.toFixed(2)}`.bgBlue.bold;
-        listado += `${idx}. ${b.nombreProducto} (${b.cantidad}) -  ${precioColor} |  ${sucursal.nombre} \n`;
+        const cantidad = `(${b.cantidad})`.bgYellow;
+        listado += `${idx}. ${b.nombreProducto} | ${cantidad} | ${precioColor} |  ${sucursal.nombre} \n`;
     })
     if(totalCarrito > 0)  listado += `\n TOTAL: S/ ${totalCarrito.toFixed(2)}`
+    
     console.log(totalCarrito > 0 ? listado : 'No tiene productos en el carrito'.bold);
+    return totalCarrito; */
+    let listado = [];
+    console.log('\n');
+    let totalCarrito = 0;
+    basketData.filter(b => b.dni === dni).forEach((b,i) => {
+        const precioItem = b.precioProducto * b.cantidad;
+        totalCarrito += precioItem;
+        const sucursal = infoSucursal(b.sucursalId);
+
+        listado.push({
+            producto: b.nombreProducto,
+            cantidad : b.cantidad,
+            precio: precioItem.toFixed(2),
+            sucursal: sucursal.nombre
+        })
+    })
+    listado.length > 0 ? console.table(listado ) : console.log('No tiene productos en el carrito');
     return totalCarrito;
 }
 

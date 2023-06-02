@@ -8,6 +8,8 @@ export const createCliente = async () => {
     const dni = await leerInput('Dni: ','dni',(value) => {
         if(value.length !== 8){
             return 'Porfavor ingrese un dni valido'
+        }else if(clientesData.find(cli => cli.dni === value)){
+            return 'El dni ya ha sido registrado'
         }
         return true;
     })
